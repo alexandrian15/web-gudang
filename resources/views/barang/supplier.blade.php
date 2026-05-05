@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Barang Keluar - TOKO ALEX JAYA</title>
+    <title>Daftar Supplier - TOKO ALEX JAYA</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
@@ -12,13 +12,14 @@
         .nav-link { color: #adb5bd; transition: 0.3s; padding: 12px 20px; }
         .nav-link:hover { color: white; background: #343a40; }
         .nav-link.active { color: white; background: #0d6efd; border-radius: 5px; }
-        .main-content {
+        .main-content { 
             padding: 30px;
             background-color: #1a1d20;
-            min-height: 100vh;
-            color: white
-        }
+            min: height 100vh;
+            color:white;}
         .card { border: none; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .contact-icon { width: 35px; height: 35px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; background: #e7f1ff; color: #0d6efd; text-decoration: none; transition: 0.3s; }
+        .contact-icon:hover { background: #0d6efd; color: white; }
     </style>
 </head>
 <body>
@@ -31,44 +32,51 @@
                 <ul class="nav flex-column">
                     <li class="nav-item"><a class="nav-link" href="/"><i class="fas fa-box me-2"></i> Stok Barang</a></li>
                     <li class="nav-item"><a class="nav-link" href="/barang-masuk"><i class="fas fa-truck-loading me-2"></i> Barang Masuk</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="/barang-keluar"><i class="fas fa-dolly me-2"></i> Barang Keluar</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/barang-keluar"><i class="fas fa-dolly me-2"></i> Barang Keluar</a></li>
                     <hr class="text-secondary">
-                    <li class="nav-item"><a class="nav-link" href="/supplier"><i class="fas fa-users me-2"></i> Supplier</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="/supplier"><i class="fas fa-users me-2"></i> Supplier</a></li>
                 </ul>
             </div>
         </nav>
 
         <main class="col-md-10 ms-sm-auto main-content">
             <div class="d-flex justify-content-between align-items-center pt-3 pb-2 mb-4 border-bottom">
-                <h1 class="h2">Riwayat Barang Keluar</h1>
-                <div>
-                    <button class="btn btn-outline-danger me-2"><i class="fas fa-file-pdf me-2"></i>Cetak PDF</button>
-                    <button class="btn btn-warning shadow-sm"><i class="fas fa-minus-circle me-2"></i>Input Barang Keluar</button>
-                </div>
+                <h1 class="h2">Database Supplier</h1>
+                <button class="btn btn-primary shadow-sm"><i class="fas fa-user-plus me-2"></i>Tambah Supplier</button>
             </div>
 
             <div class="card p-4">
                 <div class="table-responsive">
-                    <table id="tabelKeluar" class="table table-hover align-middle">
+                    <table id="tabelSupplier" class="table table-hover align-middle">
                         <thead class="table-light">
                             <tr>
-                                <th>Tanggal</th>
-                                <th>Nama Barang</th>
-                                <th>Jumlah Keluar</th>
-                                <th class="text-center">Status</th>
+                                <th>Nama Perusahaan</th>
+                                <th>Alamat</th>
+                                <th>Kontak</th>
+                                <th class="text-center">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse($riwayatKeluar as $row)
+                            @forelse($data_supplier as $sup)
                             <tr>
-                                <td>{{ date('d M Y', strtotime($row->Tanggal)) }}</td>
-                                <td class="fw-bold">{{ $row->Nama_Barang }}</td>
-                                <td><span class="badge bg-danger bg-opacity-10 text-danger" style="font-size: 1rem;">- {{ $row->Jumblah }}</span></td>
-                                <td class="text-center"><span class="badge bg-secondary">Dikirim</span></td>
+                                <td class="fw-bold text-primary">{{ $sup->Nama_Suplier }}</td>
+                                <td>{{ $sup->alamat }}</td>
+                                <td>
+                                    <span class="text-muted"><i class="fas fa-phone me-1"></i> {{ $sup->No_telfon }}</span>
+                                </td>
+                                <td class="text-center">
+                                    <div class="btn-group">
+                                        <a href="https://wa.me/{{ $sup->No_telfon }}" target="_blank" class="contact-icon me-2" title="Hubungi via WA">
+                                            <i class="fab fa-whatsapp"></i>
+                                        </a>
+                                        <button class="btn btn-sm btn-outline-secondary me-1"><i class="fas fa-edit"></i></button>
+                                        <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button>
+                                    </div>
+                                </td>
                             </tr>
                             @empty
                             <tr>
-                                <td colspan="4" class="text-center">Belum ada data barang keluar.</td>
+                                <td colspan="4" class="text-center">Belum ada data supplier.</td>
                             </tr>
                             @endforelse
                         </tbody>
@@ -84,9 +92,7 @@
 <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
 <script>
     $(document).ready(function() {
-        $('#tabelKeluar').DataTable({
-            "order": [[ 0, "desc" ]] // Urutkan berdasarkan tanggal terbaru
-        });
+        $('#tabelSupplier').DataTable();
     });
 </script>
 </body>

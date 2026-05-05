@@ -35,7 +35,7 @@
                         <a class="nav-link active" href="/barang-masuk"><i class="fas fa-truck-loading me-2"></i> Barang Masuk</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="fas fa-dolly me-2"></i> Barang Keluar</a>
+                        <a class="nav-link" href="{{ route('barang.keluar') }}"><i class="fas fa-dolly me-2"></i> Barang Keluar</a>
                     </li>
                 </ul>
             </div>

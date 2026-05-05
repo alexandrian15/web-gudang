@@ -44,7 +44,7 @@
                     </li>
                     <hr class="text-secondary">
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="fas fa-users me-2"></i> Supplier</a>
+                        <a class="nav-link" href="{{ route('supplier.index') }}"><i class="fas fa-users me-2"></i> Supplier</a>
                     </li>
                 </ul>
             </div>

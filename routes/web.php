@@ -25,3 +25,5 @@ Route::delete('/barang/hapus/{id}', [BarangController::class, 'destroy'])->name(
 Route::get('/barang-masuk', [BarangController::class, 'barangMasuk'])->name('barang.masuk');
 
 Route::get('/barang-keluar', [BarangController::class, 'barangKeluar'])->name('barang.keluar');
+
+Route::get('/supplier', [App\Http\Controllers\BarangController::class, 'supplier'])->name('supplier.index');

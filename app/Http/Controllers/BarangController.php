@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB; // Tambahkan untuk transaction
 use App\Models\BarangMasuk;
 use App\Models\Barang;
+use App\Models\Supplier; 
+
 
 class BarangController extends Controller
 {
@@ -97,5 +99,13 @@ public function barangKeluar()
                 ->get();
 
     return view('barang.keluar', compact('riwayatKeluar'));
+}
+
+public function supplier()
+{
+    // Mengambil semua data dari tabel Supplier
+    $data_supplier = \DB::table('Suplier')->get();
+
+    return view('barang.supplier', compact('data_supplier'));
 }
 }
